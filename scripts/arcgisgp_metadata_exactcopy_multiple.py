@@ -38,7 +38,7 @@ for inputFC in datasets:
     if inputdesc.dataType in ["FeatureClass", "RasterDataset", "Workspace", "ShapeFile", "FeatureDataset", "Table", "TextFile"]:
         xmlfile = xmlExport(inputFC)
     else:
-        arcpy.AddMessage("Please select an input from feature class or Table")
+        arcpy.AddMessage("Input data type not supported.")
         quit()
 
     counter += 1
