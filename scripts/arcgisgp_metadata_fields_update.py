@@ -50,7 +50,7 @@ def xmlExport(fc):
 
 def updateElemText(tag):
     # set source field attribute element
-    sourceattrElem = source_attrElem_dict[attrlabel.text]
+    sourceattrElem = source_attrElem_dict[attrlabel.text.lower()]
     # set source field attribute lable (name) element
     source_attr = sourceattrElem.find(tag)
     # if label elem is not none
@@ -77,9 +77,7 @@ sourcetree = meta.xmlMeta(sourceXML)
 targettree = meta.xmlMeta(targetXML)
 
 source_attrElem = sourcetree.findxmltagAll(metaTag["eainfoattr"])
-source_attrElem_dict = {elem.find(dataDictionary['fieldname']).text:elem for elem in source_attrElem}
-# source field name list (lowercase) for target field name check
-source_fieldlist_lower = [fieldname.lower() for fieldname in source_attrElem_dict]
+source_attrElem_dict = {elem.find(dataDictionary['fieldname']).text.lower():elem for elem in source_attrElem}
 
 target_attrElem = targettree.findxmltagAll(metaTag["eainfoattr"])
 target_attrElem_dict = {elem.find(dataDictionary['fieldname']).text:elem for elem in target_attrElem}
@@ -89,7 +87,7 @@ for attrElem in target_attrElem:
     attrlabel = attrElem.find(dataDictionary["fieldname"])
     # if field name is in skip list, also check similar name
     if len([attrlabel.text.lower() for fname in skip_fields if attrlabel.text.lower().find(fname) != -1]) == 0:
-        if (attrlabel is not None) & (attrlabel.text.lower() in source_fieldlist_lower):
+        if (attrlabel is not None) & (attrlabel.text.lower() in source_attrElem_dict):
             try:
                 # field description
                 updateElemText(dataDictionary["fielddesc"])
