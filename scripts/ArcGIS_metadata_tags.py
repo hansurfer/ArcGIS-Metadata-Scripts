@@ -64,6 +64,19 @@ dataDictionary = ([
     ("fielddesc",   "attrdef"),
     ("fielddescs",  "attrdefs"),
     ("descvalue",   "attrdomv"),
+    ("edomain",      "edom"), # child element of attrdomv - attrdomv/edom
+    ("rdomain",      "rdom"), # child element of attrdomv - attrdomv/rdom
+])
+
+codedDomain = ([
+    ("value",  "edomv"),
+    ("desc",   "edomvd"),
+    ("descs",  "edomvds"),
+])
+
+rangeDomain = ([
+    ("min",  "rdommin"),
+    ("max",  "rdommax"),
 ])
 
 #-------------- CONTACTS -----------------#
