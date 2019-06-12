@@ -6,6 +6,24 @@
 import arcpy
 import xml.etree.ElementTree as ET
 from os import path
+import tempfile
+
+
+def setscratchWS():
+    tempdir = tempfile.gettempdir()
+    scragdb = path.join(tempdir, 'scratch.gdb')
+    if arcpy.Exists(scragdb):
+        arcpy.Delete_management(scragdb)
+    arcpy.CreateFileGDB_management(tempdir, 'scratch')
+    arcpy.env.scratchWorkspace = tempdir
+
+
+def deletescratchgdb():
+    tempdir = tempfile.gettempdir()
+    scragdb = path.join(tempdir, 'scratch.gdb')
+    if arcpy.Exists(scragdb):
+        arcpy.Delete_management(scragdb)
+
 
 def xmlExport(fc):
     """
